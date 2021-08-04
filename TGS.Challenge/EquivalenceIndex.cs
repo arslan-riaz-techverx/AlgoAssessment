@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace TGS.Challenge
 {
   /*
@@ -17,9 +20,28 @@ namespace TGS.Challenge
 
     public class EquivalenceIndex
     {
-      public int Find(int[] numbers)
+        private readonly int maxArrayLength = 100000;
+        public int Find(int[] numbers)
       {
-        return -99;
-      }
+            if (numbers.Length > maxArrayLength)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            int total = numbers.Sum();
+            int current = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                total -= numbers[i];
+
+                if (current == total)
+                {
+                    return i;
+                }
+
+                current += numbers[i];
+            }
+            return -1;
+        }
     }
 }

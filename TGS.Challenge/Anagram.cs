@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace TGS.Challenge
 {
   /*
@@ -24,7 +27,17 @@ namespace TGS.Challenge
     {
       public bool AreAnagrams(string word1, string word2)
       {
-        return false;
+            if (!string.IsNullOrEmpty(word1) && !string.IsNullOrEmpty(word2))
+            {
+                word1=Lib.RemoveSpacesSpecialCharacters(word1);
+                word2 = Lib.RemoveSpacesSpecialCharacters(word2);
+                return string.Concat(word1.ToUpper().OrderBy(x => x)).Equals(string.Concat(word2.ToUpper().OrderBy(x => x)));
+            }
+            else
+            {
+                throw new ArgumentException("One word or two words are coming empty, Please write words");
+            }
+          
       }
     }
 }

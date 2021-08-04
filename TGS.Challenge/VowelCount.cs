@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TGS.Challenge
 {
@@ -16,7 +17,14 @@ namespace TGS.Challenge
     {
         public int Count(string value)
         {
-            return -1;
+            if (!string.IsNullOrEmpty(value))
+            {
+                return value.Count(c => Lib.VowelsLetter.Contains(char.ToLower(c)));
+            }
+            else
+            {
+                throw new ArgumentException("Value can't be null");
+            }
         }
     }
 }
